@@ -12,5 +12,19 @@
 <body>
   <img id="imagen" src="imagen.png" alt="Overlay" width="400">
   <div id="texto">Tu texto aquí</div>
+<script>
+async function actualizar() {
+  const res = await fetch("data.json?v=" + Date.now());
+  const data = await res.json();
+
+  document.getElementById("texto").innerText = data.texto;
+
+  const img = document.getElementById("imagen");
+  img.src = data.imagen + "?v=" + Date.now();
+}
+
+setInterval(actualizar, 3000);
+actualizar();
+</script>
 </body>
 </html>
